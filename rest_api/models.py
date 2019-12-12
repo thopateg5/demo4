@@ -9,5 +9,5 @@ class Bucketlist(models.Model):
 
     def __str__(self):
         """Return a human readable representation of the model instance."""   
-        print("{}".format(self.name))     
+       # print("{}".format(self.name))     
         return "{}".format(self.name)

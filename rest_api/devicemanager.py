@@ -47,9 +47,6 @@ class DeviceManager():
         url = 'https://%s/devices/%s?api-version=%s' % (self.iotHost, deviceId, self.API_VERSION)
         body = '{deviceId: "%s"}' % deviceId
         r = requests.put(url, headers={'Content-Type': 'application/json', 'Authorization': sasToken}, data=body)
-        if r.status_code == 200:
-            print('Success!')
-            return HttpResponse(r.text)
         return r.text, r.status_code
 
     
@@ -65,6 +62,7 @@ class DeviceManager():
         sasToken = self._buildSasToken()
         url = 'https://%s/devices?top=%d&api-version=%s' % (self.iotHost, top, self.API_VERSION)
         r = requests.get(url, headers={'Content-Type': 'application/json', 'Authorization': sasToken})
+        print(r.txt)
         return r.txt, r.status_code
 
     def createSasToken(self):
@@ -76,6 +74,7 @@ class DeviceManager():
         url = 'https://%s/devices/%s?api-version=%s' % (self.iotHost, deviceId, self.API_VERSION)
         r = requests.delete(url, headers={'Content-Type': 'application/json', 'Authorization': sasToken, 'If-Match': '*' }) 
         # If-Match Etag, but if * is used, no need to precise the Etag of the device. The Etag of the device can be seen in the header requests.text response 
+        print(r.text)
         return r.text, r.status_code
     
 # if __name__ == '__main__':
