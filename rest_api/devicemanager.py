@@ -9,6 +9,7 @@ import time
 import urllib
 import urllib.parse
 import requests
+import re
 
 from django.http import HttpResponse
 
@@ -16,7 +17,7 @@ from django.http import HttpResponse
 class DeviceManager():    
 
     API_VERSION = '2018-06-30'
-    TOKEN_VALID_SECS = 2 * 60   #365 * 24 * 60 * 60
+    TOKEN_VALID_SECS = 60 * 60   #365 * 24 * 60 * 60
     TOKEN_FORMAT = 'SharedAccessSignature sr=%s&sig=%s&se=%s&skn=%s'
     
     
@@ -62,8 +63,8 @@ class DeviceManager():
         sasToken = self._buildSasToken()
         url = 'https://%s/devices?top=%d&api-version=%s' % (self.iotHost, top, self.API_VERSION)
         r = requests.get(url, headers={'Content-Type': 'application/json', 'Authorization': sasToken})
-        print(r.txt)
-        return r.txt, r.status_code
+        
+        return r.text, r.status_code
 
     def createSasToken(self):
         sasToken1 = self._buildSasToken()
@@ -76,6 +77,26 @@ class DeviceManager():
         # If-Match Etag, but if * is used, no need to precise the Etag of the device. The Etag of the device can be seen in the header requests.text response 
         print(r.text)
         return r.text, r.status_code
+
+    def deleteAllDevice(self, top=None):
+        if top == None:
+            top = 1000
+        sasToken = self._buildSasToken()
+        url = 'https://%s/devices?top=%d&api-version=%s' % (self.iotHost, top, self.API_VERSION)
+        r = requests.delete(url, headers={'Content-Type': 'application/json', 'Authorization': sasToken,'If-Match': '*'})
+        
+        return r.text, r.status_code
+
+    def DeletelistDevice(self, top=None):
+        data = self.listDeviceIds()
+        l1 =[]
+        a = '{"deviceId":"(\\w+)"'
+        t = re.compile(a)
+        dev_name = t.findall(data[0])
+        for a in dev_name:       
+            g = self.deleteDeviceId(a)		
+            l1.append(g)
+        return l1
     
 # if __name__ == '__main__':
 # 	connectionString = 'HostName=newmyiothub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=7m1wTjgz4bgjPtTpRoV/fLhH3m73o9j9J0qtaJ9DJSU='
