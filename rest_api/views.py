@@ -68,7 +68,7 @@ class greater_than_temp(generics.ListAPIView):
         return HttpResponse(responce_from_azure)
 
 class between_humidity(generics.ListAPIView):
-
+    
     def get(self, request): 
         person_dict = json.loads(request.body)       
         min_val = person_dict['low'] 
