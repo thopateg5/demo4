@@ -2,13 +2,13 @@
 #from rest_framework import routers
 from django.conf.urls import url, include
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import Selected_Device 
-from .views import All_Device, less_than_temp, between_time
+from .views import devices ,data
+from .views import  less_than_temp, between_time
 from .views import  greater_than_temp, between_humidity
 
 urlpatterns = {
-    url(r'^Selected_Device/',Selected_Device.as_view(), name="Delete"),  
-    url(r'^All_Device/',All_Device.as_view(), name="list"),
+    url(r'^devices/',devices.as_view(), name="Delete"),  
+    url(r'^data/',data.as_view(), name="list"),
     url(r'^less_than_temp/',less_than_temp.as_view(), name="list1"),
     url(r'^greater_than_temp/',greater_than_temp.as_view(), name="list2"),    
     url(r'^between_humidity/',between_humidity.as_view(), name="list3"), 

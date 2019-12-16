@@ -88,11 +88,12 @@ class DeviceManager():
         return r.text, r.status_code
 
     def DeletelistDevice(self, top=None):
-        data = self.listDeviceIds()
+        data = self.listDeviceIds()        
         l1 =[]
         a = '{"deviceId":"(\\w+)"'
         t = re.compile(a)
-        dev_name = t.findall(data[0])
+        dev_name = t.findall(data)       # dev_name = t.findall(data[0]) 
+        
         for a in dev_name:       
             g = self.deleteDeviceId(a)		
             l1.append(g)

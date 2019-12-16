@@ -15,39 +15,77 @@ connectionString = 'HostName=demo4IoTHub.azure-devices.net;SharedAccessKeyName=i
 dm = DeviceManager(connectionString)
 dm1 = DatabaseManagement()
 
-class Selected_Device(generics.RetrieveDestroyAPIView):
+  
+class devices(generics.RetrieveDestroyAPIView):    
 
     def delete(self,request):
-        person_dict = json.loads(request.body)
-        deviceId = person_dict['name']           
-        responce_from_azure = dm.deleteDeviceId(deviceId)
-        return  HttpResponse(responce_from_azure)
+        deviceName = request.GET.get('deviceName', None)  
+
+        if(deviceName == None):
+            responce_from_azure = dm.DeletelistDevice()         
+            return HttpResponse(responce_from_azure)
+
+        else:
+             responce_from_azure = dm.deleteDeviceId(deviceName)
+             return  HttpResponse(responce_from_azure)
         
         
-    def post(self, request):
+    def post(self, request):        
         person_dict = json.loads(request.body)       
-        deviceId = person_dict['name']          
+        deviceId = person_dict['deviceName']          
         responce_from_azure = dm.createDeviceId(deviceId)        
         return  HttpResponse(responce_from_azure)   
 
             
     def get(self, request):
-        person_dict = json.loads(request.body)       
-        deviceId = person_dict['name']          
-        responce_from_azure = dm.retrieveDeviceId(deviceId)    # dm.listDeviceIds()    
-        return HttpResponse(responce_from_azure)
- 
+        deviceName = request.GET.get('deviceName', None)  
+
+        if(deviceName == None):
+            responce_from_azure = dm.listDeviceIds()                    #dm.retrieveDeviceId(deviceId)  
+            return HttpResponse(responce_from_azure)
+
+        else:
+             responce_from_azure = dm.retrieveDeviceId(deviceName)       # dm.listDeviceIds()    
+             return HttpResponse(responce_from_azure)
+
+
        
-class All_Device(generics.RetrieveDestroyAPIView):
+# class All_Device(generics.RetrieveDestroyAPIView):
     
-    def get(self, request): 
-        responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
-        return HttpResponse(responce_from_azure)
+#     def get(self, request): 
+#         responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
+#         return HttpResponse(responce_from_azure)
            
 
-    def delete(self, request):
-        responce_from_azure = dm.DeletelistDevice()         
-        return HttpResponse(responce_from_azure)
+#     def delete(self, request):
+#         responce_from_azure = dm.DeletelistDevice()         
+#         return HttpResponse(responce_from_azure)
+
+class data(generics.ListAPIView):
+
+    def get(self, request):
+        #value = request.GET.get('value', None)  
+        min = request.GET.getlist('min')
+        max = request.GET.getlist('max')
+
+
+        # if((min !=  None) & (max != None ))
+        #      print('both min max present')
+        
+        # print(min,max)
+        # return HttpResponse()
+       # max = request.GET.get('max', None) 
+
+       
+
+
+            # if(deviceName == None):
+            #     responce_from_azure = dm.listDeviceIds()                    #dm.retrieveDeviceId(deviceId)  
+            #     return HttpResponse(responce_from_azure)
+
+            # else:
+            #     responce_from_azure = dm.retrieveDeviceId(deviceName)       # dm.listDeviceIds()    
+            #     return HttpResponse(responce_from_azure)
 
 
 class less_than_temp(generics.ListAPIView):
@@ -57,6 +95,7 @@ class less_than_temp(generics.ListAPIView):
         deviceId = person_dict['value']  
         responce_from_azure = dm1.temp_less_than(deviceId) 
         #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
+        print(type(responce_from_azure))
         return HttpResponse(responce_from_azure)
 
 class greater_than_temp(generics.ListAPIView):
