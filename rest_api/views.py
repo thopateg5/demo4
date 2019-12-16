@@ -42,10 +42,8 @@ class All_Device(generics.RetrieveDestroyAPIView):
     
     def get(self, request): 
         responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
-        print(type(responce_from_azure))   
-        responce_from_azure1 = json.loads(responce_from_azure)
-        print(type(responce_from_azure1))     
-        return HttpResponse(responce_from_azure1)
+        return HttpResponse(responce_from_azure)
+           
 
     def delete(self, request):
         responce_from_azure = dm.DeletelistDevice()         
