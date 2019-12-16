@@ -21,11 +21,22 @@ class DatabaseManagement():
 	database = client.ReadDatabase("dbs/ToDoList")
 		
 
-	 
+#////////////this is for custome container access  ////////////////////////////////////
+	def get_item1(self,query,containername):  
+		data = []	
+		#database_id = mydatabase['id']  
+		database_id = self.database['id']
+		for item in self.client.QueryItems("dbs/" + database_id + "/colls/" + containername ,query ,
+								{'enableCrossPartitionQuery': True}):
+			data.append(item)
+		return (json.dumps(data,indent=True))
+
+	 #//////////////////////////////////////////////////////////
 
 	def get_item(self,query,mydatabase,containername):  
 		data = []	
-		database_id = mydatabase['id']  
+		#database_id = mydatabase['id']  
+		database_id = self.database['id']
 		for item in self.client.QueryItems("dbs/" + database_id + "/colls/" + containername ,query ,
 								{'enableCrossPartitionQuery': True}):
 			data.append(item)

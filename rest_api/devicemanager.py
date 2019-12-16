@@ -48,14 +48,14 @@ class DeviceManager():
         url = 'https://%s/devices/%s?api-version=%s' % (self.iotHost, deviceId, self.API_VERSION)
         body = '{deviceId: "%s"}' % deviceId
         r = requests.put(url, headers={'Content-Type': 'application/json', 'Authorization': sasToken}, data=body)
-        return r.text, r.status_code
+        return r.text   #, #r.status_code
 
     
     def retrieveDeviceId(self, deviceId):
         sasToken = self._buildSasToken()
         url = 'https://%s/devices/%s?api-version=%s' % (self.iotHost, deviceId, self.API_VERSION)
         r = requests.get(url, headers={'Content-Type': 'application/json', 'Authorization': sasToken})
-        return r.text, r.status_code
+        return r.text     #, #r.status_code
     
     def listDeviceIds(self, top=None):
         if top == None:
@@ -64,7 +64,7 @@ class DeviceManager():
         url = 'https://%s/devices?top=%d&api-version=%s' % (self.iotHost, top, self.API_VERSION)
         r = requests.get(url, headers={'Content-Type': 'application/json', 'Authorization': sasToken})
         
-        return r.text, r.status_code
+        return r.text    #, r.status_code
 
     def createSasToken(self):
         sasToken1 = self._buildSasToken()

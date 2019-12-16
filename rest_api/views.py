@@ -41,7 +41,7 @@ class Selected_Device(generics.RetrieveDestroyAPIView):
 class All_Device(generics.RetrieveDestroyAPIView):
     
     def get(self, request): 
-        responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
+        responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)         
         return HttpResponse(responce_from_azure)
 
     def delete(self, request):
@@ -68,7 +68,7 @@ class greater_than_temp(generics.ListAPIView):
         return HttpResponse(responce_from_azure)
 
 class between_humidity(generics.ListAPIView):
-    
+
     def get(self, request): 
         person_dict = json.loads(request.body)       
         min_val = person_dict['low'] 
@@ -89,37 +89,57 @@ class between_time(generics.ListAPIView):
 
 
 
-  
+#.................this is for custome container access........................................
 
-
-
-
-
-
-
-
-
-# class Delete_All_Device(generics.RetrieveDestroyAPIView):
+# class less_than_temp1(generics.ListAPIView):
     
-#     def delete(self, request):     
-#         #print(request.body)
+#     def get(self, request): 
 #         person_dict = json.loads(request.body)       
-#         deviceId = person_dict['name']          
-#         responce_from_azure = dm.DeletelistDevice() 
+#         g = person_dict['value'] 
+#         data = person_dict['container']   #'DeviceData'
+#         query1 = 'SELECT '+data+'.temperature, '+data+'.humidity, '+data+'.preasure   FROM  '+data+'  WHERE '+data+'.temperature<'+g
+#         responce_from_azure = dm1.get_item1(query1,data) 
+#         #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
+#         return HttpResponse(responce_from_azure)
+
+# class greater_than_temp1(generics.ListAPIView):
+        
+#     def get(self, request): 
+#         person_dict = json.loads(request.body)       
+#         g = person_dict['value'] 
+#         data = person_dict['container']   #'DeviceData'
+#         query1 = 'SELECT '+data+'.temperature, '+data+'.humidity, '+data+'.preasure   FROM  '+data+'  WHERE '+data+'.temperature>'+g
+#         responce_from_azure = dm1.get_item1(query1,data) 
+#         #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
+#         return HttpResponse(responce_from_azure)
+
+# class between_humidity1(generics.ListAPIView):
+    
+#     def get(self, request): 
+#         person_dict = json.loads(request.body)       
+#         min_val = person_dict['min_val'] 
+#         max_val = person_dict['max_val']
+#         data = person_dict['container']   #'DeviceData'
+#         query1 = 'SELECT '+data+'.temperature, '+data+'.humidity, '+data+'.preasure   FROM  '+data+'  WHERE '+data+'.humidity BETWEEN '+min_val+'  AND '+max_val  
+#         responce_from_azure = dm1.get_item1(query1,data) 
+#         #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
+#         return HttpResponse(responce_from_azure)
+
+    
+# class between_time1(generics.ListAPIView):
+        
+#     def get(self, request): 
+#         person_dict = json.loads(request.body)       
+#         min_val = person_dict['min_val'] 
+#         max_val = person_dict['max_val']
+#         data = person_dict['container']   #'DeviceData'
+#         query1 = 'SELECT '+data+'.temperature, '+data+'.humidity, '+data+'.preasure   FROM  '+data+'  WHERE '+data+'.gateway_ts BETWEEN '+min_val+'  AND '+max_val  
+#         responce_from_azure = dm1.get_item1(query1,data) 
+#         #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
 #         return HttpResponse(responce_from_azure)
 
 
-# class CreateView(generics.ListCreateAPIView):
-#     queryset = Bucketlist.objects.all()   
-#     serializer_class = BucketlistSerializer
-#     def perform_create(self, serializer):                   
-#         deviceId = 'rohit01'          
-#         dm.createDeviceId(deviceId)    
-#         serializer.save()
-# class DeleteView(generics.RetrieveDestroyAPIView):
-#     queryset = Bucketlist.objects.all()
-#     serializer_class = BucketlistSerializer    
-#     def perform_destroy(self, serializer): 
-#         dm.listDeviceIds()        
-#     def delete(self,request):
-#         print ("delete Ok")
+
+
+
+
