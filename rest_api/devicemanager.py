@@ -84,7 +84,7 @@ class DeviceManager():
         sasToken = self._buildSasToken()
         url = 'https://%s/devices?top=%d&api-version=%s' % (self.iotHost, top, self.API_VERSION)
         r = requests.delete(url, headers={'Content-Type': 'application/json', 'Authorization': sasToken,'If-Match': '*'})
-        
+       
         return r.text, r.status_code
 
     def DeletelistDevice(self, top=None):
@@ -96,6 +96,7 @@ class DeviceManager():
         for a in dev_name:       
             g = self.deleteDeviceId(a)		
             l1.append(g)
+            print(g)
         return l1
     
 # if __name__ == '__main__':

@@ -10,8 +10,8 @@ from .datamasemanagement import DatabaseManagement
 
 
 #connectionString = 'HostName=newmyiothub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=7m1wTjgz4bgjPtTpRoV/fLhH3m73o9j9J0qtaJ9DJSU='
+#connectionString = 'HostName=demo4IoTHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=/jbP/V4KmH/hvg7FvmTcaVMKp2sBZVsGPn1dwR8pPMo='
 connectionString = 'HostName=demo4IoTHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=/jbP/V4KmH/hvg7FvmTcaVMKp2sBZVsGPn1dwR8pPMo='
-
 dm = DeviceManager(connectionString)
 dm1 = DatabaseManagement()
 
