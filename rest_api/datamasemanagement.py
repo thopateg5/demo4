@@ -59,14 +59,16 @@ class DatabaseManagement():
 
 
 	def temperature_in_between(self,val_min,val_max):
-	    min_val = str(val_min)
-	    max_val = str(val_max)
-	    #a = self.get_item('SELECT DeviceData.temperature, DeviceData.humidity,DeviceData.preasure   FROM DeviceData WHERE DeviceData.humidity BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)\
-	    a = self.get_item('SELECT DeviceData.id, DeviceData.gateway_ts, DeviceData.temperature, DeviceData.humidity, DeviceData.preasure  FROM DeviceData WHERE DeviceData.temperature BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)
-	    return a
-	      
+
+		min_val = str(val_min)
+		max_val = str(val_max)
+		#a = self.get_item('SELECT DeviceData.temperature, DeviceData.humidity,DeviceData.preasure   FROM DeviceData WHERE DeviceData.humidity BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)\
+		a = self.get_item('SELECT DeviceData.id, DeviceData.gateway_ts, DeviceData.temperature, DeviceData.humidity, DeviceData.preasure  FROM DeviceData WHERE DeviceData.gateway_ts BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)
+		return a
+			
 
 	def between_time(self,val_min,val_max):
+		
 	    min_val = str(val_min)
 	    max_val = str(val_max)
 	    #a = self.get_item('SELECT DeviceData.temperature, DeviceData.humidity,DeviceData.preasure   FROM DeviceData WHERE DeviceData.gateway_ts BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)

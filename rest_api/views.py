@@ -8,6 +8,9 @@ import json
 from django.http import HttpResponse
 from .datamasemanagement import DatabaseManagement
 
+import time
+from datetime import datetime
+
 
 #connectionString = 'HostName=newmyiothub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=7m1wTjgz4bgjPtTpRoV/fLhH3m73o9j9J0qtaJ9DJSU='
 #connectionString = 'HostName=demo4IoTHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=/jbP/V4KmH/hvg7FvmTcaVMKp2sBZVsGPn1dwR8pPMo='
@@ -72,13 +75,22 @@ class data(generics.ListAPIView):
 
         if min== max == None:
             print(min , max)
-            responce_from_azure = dm1.all_data(1)   
+            responce_from_azure = dm1.all_data(20)   
             return HttpResponse(responce_from_azure)
             
 
         elif ((min != None) == (max != None)):
+            min = str(min) + " 00:00:00.000000"
+            max = str(max) + " 23:59:59.500486"
+            		
+            start_date_time_obj = datetime.strptime(min, '%Y-%m-%d %H:%M:%S.%f')
+            end_date_time_obj = datetime.strptime(max, '%Y-%m-%d %H:%M:%S.%f')
 
-            responce_from_azure = dm1.temperature_in_between(min, max)   
+            iStart=datetime.timestamp(start_date_time_obj)
+            iend=datetime.timestamp(end_date_time_obj)
+
+
+            responce_from_azure = dm1.temperature_in_between(iStart, iend)   #(min, max)   
             return HttpResponse(responce_from_azure)
 
         elif(min!=None):
@@ -95,6 +107,14 @@ class data(generics.ListAPIView):
 
             print('exit')
         
+
+            # start= request.GET.get('start',None)
+            # end = request.GET.get('end',None) 
+            # start = str(start) + " 00:00:00.000000"
+            # end = str(end) + " 17:30:26.500486" 
+
+            # responce_from_azure = dm1.between_time(start,end) 
+            # return HttpResponse(responce_from_azure)
            
         
 
