@@ -45,14 +45,14 @@ class DatabaseManagement():
 	def temp_greater_than(self,value):
 	    min_val = str(value)
 	    #a = self.get_item('SELECT DeviceData.temperature, DeviceData.humidity,DeviceData.preasure   FROM DeviceData WHERE DeviceData.temperature>'+min_val  ,self.database, self.containername)
-	    a = self.get_item('SELECT *  FROM DeviceData WHERE DeviceData.temperature>'+min_val  ,self.database, self.containername)
+	    a = self.get_item('SELECT DeviceData.id, DeviceData.gateway_ts, DeviceData.temperature, DeviceData.humidity, DeviceData.preasure  FROM DeviceData WHERE DeviceData.temperature>'+min_val  ,self.database, self.containername)
 	    return (a)
 
 		
 	def temp_less_than(self,value):
 	    min_val = str(value)
 	    #a = self.get_item('SELECT DeviceData.temperature, DeviceData.humidity,DeviceData.preasure   FROM DeviceData WHERE DeviceData.temperature<'+min_val ,self.database, self.containername)
-	    a = self.get_item('SELECT * FROM DeviceData WHERE DeviceData.temperature<'+min_val ,self.database, self.containername)
+	    a = self.get_item('SELECT DeviceData.id, DeviceData.gateway_ts, DeviceData.temperature, DeviceData.humidity, DeviceData.preasure FROM DeviceData WHERE DeviceData.temperature<'+min_val ,self.database, self.containername)
 	    return a
         #print(json.dumps(a, indent=True))
 
@@ -61,7 +61,7 @@ class DatabaseManagement():
 	    min_val = str(val_min)
 	    max_val = str(val_max)
 	    #a = self.get_item('SELECT DeviceData.temperature, DeviceData.humidity,DeviceData.preasure   FROM DeviceData WHERE DeviceData.humidity BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)\
-	    a = self.get_item('SELECT *  FROM DeviceData WHERE DeviceData.humidity BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)
+	    a = self.get_item('SELECT DeviceData.id, DeviceData.gateway_ts, DeviceData.temperature, DeviceData.humidity, DeviceData.preasure  FROM DeviceData WHERE DeviceData.humidity BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)
 	    return a
 	      
 
@@ -69,20 +69,20 @@ class DatabaseManagement():
 	    min_val = str(val_min)
 	    max_val = str(val_max)
 	    #a = self.get_item('SELECT DeviceData.temperature, DeviceData.humidity,DeviceData.preasure   FROM DeviceData WHERE DeviceData.gateway_ts BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)
-	    a = self.get_item('SELECT * FROM DeviceData WHERE DeviceData.gateway_ts BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)
+	    a = self.get_item('SELECT DeviceData.id, DeviceData.gateway_ts, DeviceData.temperature, DeviceData.humidity, DeviceData.preasure FROM DeviceData WHERE DeviceData.gateway_ts BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)
 	    print(a)
 	      
 	  
 	def latest_data(self,value):
 	    min_val = str(value)
 	    #a = self.get_item('SELECT top '+min_val+' DeviceData.temperature, DeviceData.humidity,DeviceData.preasure   FROM DeviceData order by DeviceData._ts desc',self.database, self.containername)
-	    a = self.get_item('SELECT top '+min_val+' *  FROM DeviceData order by DeviceData._ts desc',self.database, self.containername)
+	    a = self.get_item('SELECT top '+min_val+' DeviceData.id, DeviceData.gateway_ts, DeviceData.temperature, DeviceData.humidity, DeviceData.preasure  FROM DeviceData order by DeviceData._ts desc',self.database, self.containername)
 	    return a
 	   
 	def all_data(self,value):
 	    min_val = str(value)
 	    #a = self.get_item('SELECT top '+min_val+'  DeviceData.temperature, DeviceData.humidity,DeviceData.preasure  FROM DeviceData order by DeviceData._ts desc',self.database, self.containername)
-	    a = self.get_item('SELECT top '+min_val+'  *  FROM DeviceData order by DeviceData._ts desc',self.database, self.containername)		
+	    a = self.get_item('SELECT top '+min_val+'  DeviceData.id, DeviceData.gateway_ts, DeviceData.temperature, DeviceData.humidity, DeviceData.preasure  FROM DeviceData order by DeviceData._ts desc',self.database, self.containername)		
 	    return a
       
 	      
