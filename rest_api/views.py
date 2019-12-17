@@ -65,14 +65,39 @@ class data(generics.ListAPIView):
 
     def get(self, request):
         #value = request.GET.get('value', None)  
-        min = request.GET.getlist('min')
-        max = request.GET.getlist('max')
+        min= request.GET.get('min',None)
+        max = request.GET.get('max',None)
+        print(min ,max)
 
 
-        # if((min !=  None) & (max != None ))
-        #      print('both min max present')
+        if min== max == None:
+            print(min , max)
+            responce_from_azure = dm1.all_data(10)   
+            return HttpResponse(responce_from_azure)
+            
+
+        elif ((min != None) == (max != None)):
+
+            responce_from_azure = dm1.humidity_in_between(min, max)   
+            return HttpResponse(responce_from_azure)
+
+        elif(min!=None):
+
+            responce_from_azure = dm1.temp_less_than(min)   
+            return HttpResponse(responce_from_azure)
+            
+        elif(max!=None):
+
+            responce_from_azure = dm1.temp_greater_than(max)   
+            return HttpResponse(responce_from_azure)
+
+        else:
+
+            print('exit')
         
-        # print(min,max)
+           
+        
+        # # print(min,max)
         # return HttpResponse()
        # max = request.GET.get('max', None) 
 
