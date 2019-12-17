@@ -78,7 +78,7 @@ class data(generics.ListAPIView):
 
         elif ((min != None) == (max != None)):
 
-            responce_from_azure = dm1.humidity_in_between(min, max)   
+            responce_from_azure = dm1.temperature_in_between(min, max)   
             return HttpResponse(responce_from_azure)
 
         elif(min!=None):

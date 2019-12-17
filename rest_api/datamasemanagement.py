@@ -40,6 +40,7 @@ class DatabaseManagement():
 		for item in self.client.QueryItems("dbs/" + database_id + "/colls/" + containername ,query ,
 								{'enableCrossPartitionQuery': True}):
 			data.append(item)
+		
 		return (json.dumps(data,indent=True))
 
 	def temp_greater_than(self,value):
@@ -57,11 +58,11 @@ class DatabaseManagement():
         #print(json.dumps(a, indent=True))
 
 
-	def humidity_in_between(self,val_min,val_max):
+	def temperature_in_between(self,val_min,val_max):
 	    min_val = str(val_min)
 	    max_val = str(val_max)
 	    #a = self.get_item('SELECT DeviceData.temperature, DeviceData.humidity,DeviceData.preasure   FROM DeviceData WHERE DeviceData.humidity BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)\
-	    a = self.get_item('SELECT DeviceData.id, DeviceData.gateway_ts, DeviceData.temperature, DeviceData.humidity, DeviceData.preasure  FROM DeviceData WHERE DeviceData.humidity BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)
+	    a = self.get_item('SELECT DeviceData.id, DeviceData.gateway_ts, DeviceData.temperature, DeviceData.humidity, DeviceData.preasure  FROM DeviceData WHERE DeviceData.temperature BETWEEN '+min_val+'  AND '+max_val ,self.database, self.containername)
 	    return a
 	      
 
