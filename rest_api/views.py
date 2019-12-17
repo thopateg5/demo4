@@ -75,7 +75,7 @@ class data(generics.ListAPIView):
 
         if min== max == None:
             print(min , max)
-            responce_from_azure = dm1.all_data(20)   
+            responce_from_azure = dm1.all_data(1)   
             return HttpResponse(responce_from_azure)
             
 
