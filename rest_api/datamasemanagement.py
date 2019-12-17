@@ -75,12 +75,14 @@ class DatabaseManagement():
 	  
 	def latest_data(self,value):
 	    min_val = str(value)
-	    a = self.get_item('SELECT top '+min_val+' DeviceData.temperature, DeviceData.humidity,DeviceData.preasure   FROM DeviceData order by DeviceData._ts desc',self.database, self.containername)
+	    #a = self.get_item('SELECT top '+min_val+' DeviceData.temperature, DeviceData.humidity,DeviceData.preasure   FROM DeviceData order by DeviceData._ts desc',self.database, self.containername)
+	    a = self.get_item('SELECT top '+min_val+' *  FROM DeviceData order by DeviceData._ts desc',self.database, self.containername)
 	    return a
 	   
 	def all_data(self,value):
 	    min_val = str(value)
-	    a = self.get_item('SELECT top '+min_val+'  DeviceData.temperature, DeviceData.humidity,DeviceData.preasure  FROM DeviceData order by DeviceData._ts desc',self.database, self.containername)
+	    #a = self.get_item('SELECT top '+min_val+'  DeviceData.temperature, DeviceData.humidity,DeviceData.preasure  FROM DeviceData order by DeviceData._ts desc',self.database, self.containername)
+	    a = self.get_item('SELECT top '+min_val+'  *  FROM DeviceData order by DeviceData._ts desc',self.database, self.containername)		
 	    return a
       
 	      
