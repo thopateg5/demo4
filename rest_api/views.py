@@ -72,7 +72,7 @@ class data(generics.ListAPIView):
 
         if min== max == None:
             print(min , max)
-            responce_from_azure = dm1.all_data(10)   
+            responce_from_azure = dm1.all_data(1)   
             return HttpResponse(responce_from_azure)
             
 
@@ -97,60 +97,45 @@ class data(generics.ListAPIView):
         
            
         
-        # # print(min,max)
-        # return HttpResponse()
-       # max = request.GET.get('max', None) 
 
-       
-
-
-            # if(deviceName == None):
-            #     responce_from_azure = dm.listDeviceIds()                    #dm.retrieveDeviceId(deviceId)  
-            #     return HttpResponse(responce_from_azure)
-
-            # else:
-            #     responce_from_azure = dm.retrieveDeviceId(deviceName)       # dm.listDeviceIds()    
-            #     return HttpResponse(responce_from_azure)
-
-
-class less_than_temp(generics.ListAPIView):
+# class less_than_temp(generics.ListAPIView):
     
-    def get(self, request): 
-        person_dict = json.loads(request.body)       
-        deviceId = person_dict['value']  
-        responce_from_azure = dm1.temp_less_than(deviceId) 
-        #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
-        print(type(responce_from_azure))
-        return HttpResponse(responce_from_azure)
+#     def get(self, request): 
+#         person_dict = json.loads(request.body)       
+#         deviceId = person_dict['value']  
+#         responce_from_azure = dm1.temp_less_than(deviceId) 
+#         #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
+#         print(type(responce_from_azure))
+#         return HttpResponse(responce_from_azure)
 
-class greater_than_temp(generics.ListAPIView):
+# class greater_than_temp(generics.ListAPIView):
     
-    def get(self, request): 
-        person_dict = json.loads(request.body)       
-        vlaue = person_dict['value']  
-        responce_from_azure = dm1.temp_greater_than(vlaue) 
-        #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
-        return HttpResponse(responce_from_azure)
+#     def get(self, request): 
+#         person_dict = json.loads(request.body)       
+#         vlaue = person_dict['value']  
+#         responce_from_azure = dm1.temp_greater_than(vlaue) 
+#         #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
+#         return HttpResponse(responce_from_azure)
 
-class between_humidity(generics.ListAPIView):
+# class between_humidity(generics.ListAPIView):
 
-    def get(self, request): 
-        person_dict = json.loads(request.body)       
-        min_val = person_dict['low'] 
-        max_val = person_dict['high'] 
-        responce_from_azure = dm1.humidity_in_between(min_val, max_val) 
-        #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
-        return HttpResponse(responce_from_azure)
+#     def get(self, request): 
+#         person_dict = json.loads(request.body)       
+#         min_val = person_dict['low'] 
+#         max_val = person_dict['high'] 
+#         responce_from_azure = dm1.humidity_in_between(min_val, max_val) 
+#         #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
+#         return HttpResponse(responce_from_azure)
 
-class between_time(generics.ListAPIView):
+# class between_time(generics.ListAPIView):
     
-    def get(self, request): 
-        person_dict = json.loads(request.body)       
-        min_val = person_dict['low'] 
-        max_val = person_dict['high'] 
-        responce_from_azure = dm1.between_time(min_val, max_val) 
-        #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
-        return HttpResponse(responce_from_azure)
+#     def get(self, request): 
+#         person_dict = json.loads(request.body)       
+#         min_val = person_dict['low'] 
+#         max_val = person_dict['high'] 
+#         responce_from_azure = dm1.between_time(min_val, max_val) 
+#         #responce_from_azure = dm.listDeviceIds()     #dm.retrieveDeviceId(deviceId)  
+#         return HttpResponse(responce_from_azure)
 
 
 
